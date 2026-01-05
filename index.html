@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nio Fibras - Internet Estável e Moderna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Para ícones, se necessário -->
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* Branco */
+            color: #004d00; /* Verde escuro */
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #004d00; /* Verde escuro */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #90EE90; /* Verde claro */
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: '🌐'; /* Ícone de internet para modernidade */
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Botão WhatsApp no topo direito com logo do WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #25D366; /* Verde WhatsApp */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Seção principal (Hero) */
+        .hero {
+            background: linear-gradient(135deg, #90EE90 0%, #ffffff 100%); /* Gradiente verde claro para branco */
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #004d00;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: #004d00;
+            color: #90EE90;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #003300; /* Verde mais escuro */
+        }
+
+        /* Seções adicionais */
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f9f9f9; /* Fundo leve para alternar */
+        }
+
+        .section:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #004d00;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .testimonial {
+            background-color: #ffffff;
+            border: 1px solid #90EE90;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .testimonial cite {
+            font-weight: bold;
+            color: #004d00;
+        }
+
+        /* Planos */
+        .plans {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .plan {
+            background-color: #ffffff;
+            border: 1px solid #90EE90;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .plan h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #004d00;
+        }
+
+        .plan ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .plan ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #004d00;
+            color: #90EE90;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .section h2 {
+                font-size: 2em;
+            }
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            .testimonials, .plans {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Nio Fibras</div>
+    </header>
+
+    <!-- Botão WhatsApp com logo do WhatsApp -->
+    <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="whatsapp-btn" target="_blank" title="Falar no WhatsApp">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+
+    <!-- Seção Principal (Hero) -->
+    <section class="hero">
+        <h1>Bem-vindo à Nio Fibras</h1>
+        <p>
+            A Nio Fibras nasceu da insatisfação das pessoas com a instabilidade das redes de outras empresas. 
+            Estamos aqui para oferecer uma conexão de internet confiável, rápida e moderna, 
+            utilizando tecnologias de ponta para garantir que você nunca fique desconectado. 
+            Junte-se a nós e experimente a diferença de uma internet verdadeiramente estável.
+        </p>
+        <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Falar com Suporte Humanizado</a>
+    </section>
+
+    <!-- Seção Internet para Pessoas Físicas -->
+    <section class="section">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Internet para Pessoas Físicas - Família conectada">
+        <h2>Internet para Pessoas Físicas</h2>
+        <p>
+            Desfrute de uma conexão de internet rápida e estável em casa. 
+            Planos personalizados para streaming, jogos online e trabalho remoto, 
+            com suporte dedicado para manter sua família sempre conectada.
+        </p>
+        <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Saiba Mais</a>
+    </section>
+
+    <!-- Seção Internet para Empresas -->
+    <section class="section">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Internet para Empresas - Escritório moderno">
+        <h2>Internet para Empresas</h2>
+        <p>
+            Soluções empresariais robustas com alta velocidade e segurança. 
+            Ideal para videoconferências, armazenamento em nuvem e operações diárias, 
+            garantindo produtividade e confiabilidade para seu negócio.
+        </p>
+        <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Saiba Mais</a>
+    </section>
+
+    <!-- Seção Depoimentos -->
+    <section class="section">
+        <h2>O que Nossos Clientes Dizem</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"A Nio Fibras mudou minha experiência com internet. Nunca mais tive quedas de conexão durante minhas reuniões online!"</p>
+                <cite>- João Silva, Empresário</cite>
+            </div>
+            <div class="testimonial">
+                <p>"Para minha família, a estabilidade é tudo. Com a Nio, conseguimos assistir filmes sem interrupções. Recomendo!"</p>
+                <cite>- Maria Oliveira, Professora</cite>
+            </div>
+            <div class="testimonial">
+                <p>"Como gamer, velocidade é essencial. A Nio Fibras entrega o que promete, sem lag em jogos multiplayer."</p>
+                <cite>- Carlos Pereira, Desenvolvedor</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Planos de Internet -->
+    <section class="section">
+        <h2>Nossos Planos de Internet</h2>
+        <div class="plans">
+            <div class="plan">
+                <h3>Plano Básico</h3>
+                <ul>
+                    <li>Velocidade de até 50 Mbps</li>
+                    <li>Ideal para navegação e streaming básico</li>
+                    <li>Suporte 24/7</li>
+                </ul>
+                <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Saiba Mais</a>
+            </div>
+            <div class="plan">
+                <h3>Plano Intermediário</h3>
+                <ul>
+                    <li>Velocidade de até 100 Mbps</li>
+                    <li>Perfeito para trabalho remoto e jogos</li>
+                    <li>Wi-Fi incluído</li>
+                </ul>
+                <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Saiba Mais</a>
+            </div>
+            <div class="plan">
+                <h3>Plano Avançado</h3>
+                <ul>
+                    <li>Velocidade de até 200 Mbps</li>
+                    <li>Para famílias grandes e empresas pequenas</li>
+                    <li>Segurança avançada</li>
+                </ul>
+                <a href="https://wa.me/message/QF2XY7K2FBMRI1" class="cta-btn" target="_blank">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Nio Fibras. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script opcional para interatividade, se necessário -->
+    <script>
+        // Nenhum script adicional necessário para esta landing page simples
+    </script>
+</body>
+</html>
